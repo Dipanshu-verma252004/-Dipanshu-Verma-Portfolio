@@ -1,8 +1,5 @@
 @extends('frontend.layouts.app')
-
-@section('title', 'Experience')
-
+@section('title', 'Experience | Dipanshu Verma')
 @section('content')
-    <h1>Experience</h1>
-    <p>Experience page coming soon.</p>
+<section class="section"><div class="container"><div class="section-title"><div class="kicker">Career</div><h1>Experience</h1><p>Professional experience and hands-on development work.</p></div><div class="timeline">@forelse($experiences as $experience)<article class="timeline-item card-pro"><div class="d-flex flex-wrap justify-content-between gap-2"><div><h3 class="mb-1">{{ $experience->designation }}</h3><div class="text-info fw-semibold">{{ $experience->company_name }}</div></div><div class="muted">{{ optional($experience->start_date)->format('M Y') }} — {{ $experience->is_current ? 'Present' : optional($experience->end_date)->format('M Y') }}</div></div><div class="muted mt-2">{{ $experience->location }} · {{ $experience->employment_type }}</div><p class="muted mt-3 mb-2">{{ $experience->description }}</p>@if($experience->technologies)<div>@foreach((array)$experience->technologies as $tech)<span class="tag">{{ $tech }}</span>@endforeach</div>@endif</article>@empty<div class="card-pro"><p class="muted mb-0">Experience records will appear here when added from the admin/data layer.</p></div>@endforelse</div></div></section>
 @endsection
