@@ -23,6 +23,7 @@ class ContactController extends Controller
             'message' => ['required', 'string', 'max:5000'],
         ]);
 
+        // The current contact_messages schema does not contain a phone column.
         unset($validated['phone']);
         ContactMessage::query()->create($validated);
 
