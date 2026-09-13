@@ -1,0 +1,8 @@
+@extends('admin.layouts.app')
+@section('title', $category->exists ? 'Edit Skill Category' : 'Add Skill Category')
+@section('breadcrumb', $category->exists ? 'Edit Skill Category' : 'Add Skill Category')
+@section('content')
+<div class="mb-4"><h1 class="h3 mb-1">{{ $category->exists ? 'Edit Skill Category' : 'Add Skill Category' }}</h1><p class="text-muted mb-0">Create categories such as Backend, Frontend, Database and Tools.</p></div>
+<form method="POST" action="{{ $category->exists ? route('admin.skills.update',$category) : route('admin.skills.store') }}">@csrf @if($category->exists) @method('PUT') @endif
+<div class="card shadow-sm"><div class="card-body"><div class="row g-3"><div class="col-md-7"><label class="form-label">Category Name *</label><input name="name" class="form-control" value="{{ old('name',$category->name) }}" required></div><div class="col-md-2"><label class="form-label">Order</label><input type="number" min="0" name="sort_order" class="form-control" value="{{ old('sort_order',$category->sort_order ?? 0) }}"></div><div class="col-md-3 d-flex align-items-end"><div class="form-check form-switch mb-2"><input class="form-check-input" type="checkbox" name="is_active" value="1" id="active" {{ old('is_active',$category->is_active ?? true) ? 'checked' : '' }}><label class="form-check-label" for="active">Active</label></div></div></div></div><div class="card-footer d-flex justify-content-between"><a href="{{ route('admin.skills.index') }}" class="btn btn-outline-secondary">Cancel</a><button class="btn btn-primary">Save Category</button></div></div></form>
+@endsection
