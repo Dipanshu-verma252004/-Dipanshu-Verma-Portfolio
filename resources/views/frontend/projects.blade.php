@@ -1,11 +1,5 @@
 @extends('frontend.layouts.app')
-
-@section('title', 'Projects')
-
+@section('title', 'Projects | Dipanshu Verma')
 @section('content')
-    <h1>Projects</h1>
-
-    @foreach ($projects as $project)
-        <h2>{{ $project->title }}</h2>
-    @endforeach
+<section class="section"><div class="container"><div class="section-title"><div class="kicker">Portfolio</div><h1>Projects</h1><p>Selected applications built with PHP, Laravel, MySQL and modern web technologies.</p></div><div class="row g-4">@forelse($projects as $project)<div class="col-md-6 col-lg-4"><a href="{{ route('frontend.projects.show', $project) }}"><div class="card-pro project-card"><div class="project-media">{{ $project->project_type ?? 'Web Application' }}</div><div class="project-body"><div class="d-flex justify-content-between gap-2"><span class="muted small">{{ $project->project_type ?? 'Development' }}</span>@if($project->is_featured)<span class="text-info small fw-bold">Featured</span>@endif</div><h3 class="mt-2">{{ $project->title }}</h3><p class="muted">{{ $project->short_description }}</p><div>@foreach((array)$project->technologies as $tech)<span class="tag">{{ $tech }}</span>@endforeach</div><div class="text-info fw-semibold mt-3">View project →</div></div></div></a></div>@empty<div class="col-12"><div class="card-pro"><h3>No active projects yet.</h3><p class="muted mb-0">Add project records to display them here.</p></div></div>@endforelse</div></div></section>
 @endsection
