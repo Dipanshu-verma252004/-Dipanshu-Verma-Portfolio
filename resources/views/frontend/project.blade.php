@@ -1,8 +1,5 @@
 @extends('frontend.layouts.app')
-
-@section('title', $project->title)
-
+@section('title', $project->title.' | Dipanshu Verma')
 @section('content')
-    <h1>{{ $project->title }}</h1>
-    <p>Project details coming soon.</p>
+<section class="section"><div class="container"><a class="muted" href="{{ route('frontend.projects.index') }}">← Back to projects</a><div class="row g-5 mt-2"><div class="col-lg-7"><span class="eyebrow">{{ $project->project_type ?? 'Web Application' }}</span><h1 class="display-4 fw-bold mt-3">{{ $project->title }}</h1><p class="lead muted">{{ $project->short_description }}</p><div class="card-pro mt-4"><h3>Overview</h3><div class="muted">{!! nl2br(e($project->description ?? '')) !!}</div>@if($project->challenges)<h4 class="mt-4">Challenge</h4><p class="muted">{!! nl2br(e($project->challenges)) !!}</p>@endif@if($project->solution)<h4 class="mt-4">Solution</h4><p class="muted">{!! nl2br(e($project->solution)) !!}</p>@endif</div></div><div class="col-lg-5"><div class="card-pro"><h4>Project details</h4><dl class="row mt-3 mb-0"><dt class="col-5 muted">Role</dt><dd class="col-7">{{ $project->role ?? 'Developer' }}</dd><dt class="col-5 muted">Client</dt><dd class="col-7">{{ $project->client_name ?? '—' }}</dd><dt class="col-5 muted">Period</dt><dd class="col-7">{{ optional($project->start_date)->format('M Y') ?? '—' }}</dd></dl><hr><div>@foreach((array)$project->technologies as $tech)<span class="tag">{{ $tech }}</span>@endforeach</div><div class="d-flex flex-wrap gap-2 mt-4">@if($project->live_url)<a class="btn btn-main" href="{{ $project->live_url }}" target="_blank" rel="noopener">Live Demo ↗</a>@endif@if($project->github_url)<a class="btn btn-ghost" href="{{ $project->github_url }}" target="_blank" rel="noopener">Source Code ↗</a>@endif</div></div></div></div></div></section>
 @endsection
