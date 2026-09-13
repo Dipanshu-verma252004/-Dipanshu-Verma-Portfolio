@@ -1,0 +1,8 @@
+@extends('admin.layouts.app')
+@section('title','Skills')
+@section('breadcrumb','Skills')
+@section('content')
+<div class="d-flex justify-content-between align-items-center mb-4"><div><h1 class="h3 mb-1">Skills</h1><p class="text-muted mb-0">Manage skill categories and the skills shown on your portfolio.</p></div><a href="{{ route('admin.skills.create') }}" class="btn btn-primary"><i class="bi bi-plus-lg me-2"></i>Add Category</a></div>
+<div class="card shadow-sm"><div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead><tr><th>Category</th><th>Skills</th><th>Order</th><th>Status</th><th class="text-end">Actions</th></tr></thead><tbody>
+@forelse($categories as $category)<tr><td class="fw-semibold">{{ $category->name }}</td><td><span class="badge text-bg-light">{{ $category->skills_count }} skills</span></td><td>{{ $category->sort_order }}</td><td><span class="badge {{ $category->is_active ? 'text-bg-success' : 'text-bg-secondary' }}">{{ $category->is_active ? 'Active' : 'Inactive' }}</span></td><td class="text-end"><a href="{{ route('admin.skills.edit',$category) }}" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></a><form method="POST" action="{{ route('admin.skills.destroy',$category) }}" class="d-inline" onsubmit="return confirm('Delete category and its skills?')">@csrf @method('DELETE')<button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button></form></td></tr>@empty<tr><td colspan="5" class="text-center py-5 text-muted">No skill categories found.</td></tr>@endforelse</tbody></table></div><div class="card-footer">{{ $categories->links() }}</div></div>
+@endsection
