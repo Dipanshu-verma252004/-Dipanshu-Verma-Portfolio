@@ -1,0 +1,7 @@
+@extends('admin.layouts.app')
+@section('title','Message')
+@section('breadcrumb','Message')
+@section('content')
+<div class="d-flex justify-content-between align-items-center mb-4"><div><h1 class="h3 mb-1">Message Details</h1><p class="text-muted mb-0">Received {{ $message->created_at?->format('M j, Y h:i A') }}</p></div><a href="{{ route('admin.messages.index') }}" class="btn btn-outline-secondary">Back to Messages</a></div>
+<div class="row g-4"><div class="col-lg-8"><div class="card shadow-sm"><div class="card-body"><h4>{{ $message->subject ?: 'No subject' }}</h4><div class="text-muted small mb-4">From <strong>{{ $message->name }}</strong> · {{ $message->email }}</div><div class="border rounded p-4 bg-light" style="white-space:pre-wrap">{{ $message->message }}</div></div></div></div><div class="col-lg-4"><div class="card shadow-sm"><div class="card-header fw-semibold">Update Status</div><div class="card-body"><form method="POST" action="{{ route('admin.messages.status',$message) }}">@csrf @method('PATCH')<select name="status" class="form-select mb-3"><option value="new" @selected($message->status==='new')>New</option><option value="read" @selected($message->status==='read')>Read</option><option value="replied" @selected($message->status==='replied')>Replied</option><option value="archived" @selected($message->status==='archived')>Archived</option></select><button class="btn btn-primary w-100">Update Status</button></form></div></div></div></div>
+@endsection
