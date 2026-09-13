@@ -1,11 +1,5 @@
 @extends('frontend.layouts.app')
-
-@section('title', 'Blog')
-
+@section('title', 'Blog | Dipanshu Verma')
 @section('content')
-    <h1>Blog</h1>
-
-    @foreach ($blogs as $blog)
-        <h2>{{ $blog->title }}</h2>
-    @endforeach
+<section class="section"><div class="container"><div class="section-title"><div class="kicker">Insights</div><h1>Blog</h1><p>Notes on PHP, Laravel, databases and practical web development.</p></div><div class="row g-4">@forelse($blogs as $blog)<div class="col-md-6 col-lg-4"><a href="{{ route('frontend.blog.show', $blog) }}"><article class="card-pro"><div class="muted small">{{ optional($blog->published_at)->format('M d, Y') }}</div><h3 class="mt-2">{{ $blog->title }}</h3><p class="muted">{{ $blog->excerpt }}</p><span class="text-info fw-semibold">Read article →</span></article></a></div>@empty<div class="col-12"><div class="card-pro"><p class="muted mb-0">No published articles yet.</p></div></div>@endforelse</div></div></section>
 @endsection
