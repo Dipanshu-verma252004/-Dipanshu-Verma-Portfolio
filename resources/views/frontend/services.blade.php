@@ -1,8 +1,5 @@
 @extends('frontend.layouts.app')
-
-@section('title', 'Services')
-
+@section('title', 'Services | Dipanshu Verma')
 @section('content')
-    <h1>Services</h1>
-    <p>Services page coming soon.</p>
+<section class="section"><div class="container"><div class="section-title"><div class="kicker">Services</div><h1>What I can build for you.</h1><p>Focused development services for Laravel, PHP and database-driven web applications.</p></div><div class="row g-4">@forelse($services as $service)<div class="col-md-6 col-lg-4"><div class="card-pro"><div class="text-info fs-4 mb-3">{{ $service->icon ?? '◆' }}</div><h3>{{ $service->title }}</h3><p class="muted">{{ $service->short_description }}</p><p class="muted mb-0">{{ $service->description }}</p></div></div>@empty<div class="col-12"><div class="card-pro"><p class="muted mb-0">Services are ready to be managed through the portfolio data layer.</p></div></div>@endforelse</div></div></section>
 @endsection
