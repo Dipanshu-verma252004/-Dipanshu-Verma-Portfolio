@@ -8,23 +8,24 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    /**
-     * Display the contact page.
-     */
     public function index()
     {
         return view('frontend.contact');
     }
 
-    /**
-     * Store a new contact message.
-     */
     public function store(Request $request)
     {
-        ContactMessage::query()->create(
-            $request->only(['name', 'email', 'subject', 'message']),
-        );
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:100'],
+            'email' => ['required', 'email', 'max:150'],
+            'phone' => ['nullable', 'string', 'max:30'],
+            'subject' => ['required', 'string', 'max:180'],
+            'message' => ['required', 'string', 'max:5000'],
+        ]);
 
-        return redirect()->route('frontend.contact');
+        unset($validated['phone']);
+        ContactMessage::query()->create($validated);
+
+        return redirect()->route('frontend.contact')->with('success', 'Thanks! Your message has been sent successfully.');
     }
 }
